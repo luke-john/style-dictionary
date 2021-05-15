@@ -11,10 +11,10 @@
  * and limitations under the License.
  */
 
-import Dictionary from './Dictionary';
-import File from './File';
-import Options from './Options';
-import Platform from './Platform';
+import { Dictionary } from "./Dictionary";
+import { File } from "./File";
+import { Options } from "./Options";
+import { Platform } from "./Platform";
 
 interface FormatterArguments {
   dictionary: Dictionary;
@@ -25,9 +25,7 @@ interface FormatterArguments {
 
 type Formatter = (this: File, arguments: FormatterArguments) => string;
 
-interface Format {
+export interface Format {
   name: string;
   formatter: Formatter;
 }
-
-export default Format;

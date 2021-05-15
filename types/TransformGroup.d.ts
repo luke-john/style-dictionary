@@ -11,9 +11,7 @@
  * and limitations under the License.
  */
 
-interface TransformGroup {
+export interface TransformGroup {
   name: string;
   transforms: string[];
 }
-
-export default TransformGroup;

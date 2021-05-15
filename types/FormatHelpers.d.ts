@@ -11,9 +11,9 @@
  * and limitations under the License.
  */
 
-import Dictionary from './Dictionary';
-import TransformedToken from './TransformedToken';
-import File from './File';
+import { Dictionary } from "./Dictionary";
+import { TransformedToken } from "./TransformedToken";
+import { File } from "./File";
 
 interface LineFormatting {
   prefix?: string;
@@ -28,7 +28,7 @@ type TokenFormatterArguments = {
   dictionary: Dictionary;
   format?: "css" | "sass" | "less" | "stylus";
   formatting?: LineFormatting;
-}
+};
 
 interface CommentFormatting {
   prefix: string;
@@ -45,16 +45,15 @@ interface FileHeaderParameters {
 
 interface FormattedVariablesOptions {
   format: "css" | "sass";
-  dictionary: Dictionary
+  dictionary: Dictionary;
   outputReferences?: boolean;
   formatting?: LineFormatting;
 }
 
-interface FormatHelpers {
-  createPropertyFormatter: (options: TokenFormatterArguments) =>
-    (token: TransformedToken) => string;
+export interface FormatHelpers {
+  createPropertyFormatter: (
+    options: TokenFormatterArguments
+  ) => (token: TransformedToken) => string;
   fileHeader: (options: FileHeaderParameters) => string;
   formattedVariables: (options: FormattedVariablesOptions) => string;
 }
-
-export default FormatHelpers;

@@ -11,16 +11,14 @@
  * and limitations under the License.
  */
 
-import { DesignTokens } from './DesignToken';
+import { DesignTokens } from "./DesignToken";
 
 interface ParserOptions {
   contents: string;
   filePath: string;
 }
 
-interface Parser {
+export interface Parser {
   pattern: RegExp;
   parse: (options: ParserOptions) => DesignTokens;
 }
-
-export default Parser;

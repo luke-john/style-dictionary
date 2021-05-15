@@ -11,9 +11,9 @@
  * and limitations under the License.
  */
 
-import Matcher from './Matcher';
-import TransformedToken from './TransformedToken';
-import Platform from './Platform';
+import { Matcher } from "./Matcher";
+import { TransformedToken } from "./TransformedToken";
+import { Platform } from "./Platform";
 
 interface NameTransform {
   type: "name";
@@ -31,9 +31,10 @@ interface ValueTransform {
 interface AttributeTransform {
   type: "attribute";
   matcher?: Matcher;
-  transformer: (token: TransformedToken, options?: Platform) => { [key: string]: any };
+  transformer: (
+    token: TransformedToken,
+    options?: Platform
+  ) => { [key: string]: any };
 }
 
-type Transform = NameTransform | ValueTransform | AttributeTransform;
-
-export default Transform;
+export type Transform = NameTransform | ValueTransform | AttributeTransform;

@@ -11,9 +11,9 @@
  * and limitations under the License.
  */
 
-import DesignToken from './DesignToken';
+import { DesignToken } from "./DesignToken";
 
-type TransformedToken = DesignToken & {
+export type TransformedToken = DesignToken & {
   name: string;
   /** The object path of the property.
    *
@@ -36,10 +36,8 @@ type TransformedToken = DesignToken & {
    * If the token is from a file defined in the source array as opposed to include in the [configuration](https://amzn.github.io/style-dictionary/#/config).
    */
   isSource: boolean;
-}
+};
 
 export interface TransformedTokens {
   [key: string]: TransformedTokens | TransformedToken;
 }
-
-export default TransformedToken;

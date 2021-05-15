@@ -12,7 +12,7 @@
  */
 
 import { expectType, expectError } from "tsd";
-import StyleDictionary = require(".");
+import StyleDictionary from ".";
 
 expectType<StyleDictionary.Core>(StyleDictionary.buildAllPlatforms());
 expectType<StyleDictionary.Core>(StyleDictionary.buildPlatform("web"));

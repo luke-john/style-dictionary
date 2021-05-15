@@ -11,11 +11,9 @@
  * and limitations under the License.
  */
 
-import Matcher from './Matcher';
+import { Matcher } from "./Matcher";
 
-interface Filter {
+export interface Filter {
   name: string;
   matcher: Matcher;
 }
-
-export default Filter;

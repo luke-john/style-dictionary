@@ -13,85 +13,79 @@
 
 // Minimum TypeScript Version: 3.0
 
-import _DesignToken, {DesignTokens as _DesignTokens} from './DesignToken';
-import _File from './File';
-import _Options from './Options';
-import _FileHeader from './FileHeader';
-import _TransformedToken, {TransformedTokens as _TransformedTokens} from './TransformedToken';
-import _Platform from './Platform';
-import _Transform from './Transform';
-import _Filter from './Filter';
-import _Format from './Format';
-import _Dictionary from './Dictionary';
-import _TransformGroup from './TransformGroup';
-import _Action from './Action';
-import _Parser from './Parser';
-import _Config from './Config';
-import FormatHelpers from './FormatHelpers';
+import { DesignToken, DesignTokens } from "./DesignToken";
+import { FileHeader } from "./FileHeader";
+import { TransformedToken, TransformedTokens } from "./TransformedToken";
+import { Transform } from "./Transform";
+import { Filter } from "./Filter";
+import { Format } from "./Format";
+import { TransformGroup } from "./TransformGroup";
+import { Action } from "./Action";
+import { Parser } from "./Parser";
+import { Config } from "./Config";
+import { FormatHelpers } from "./FormatHelpers";
 
-import { Named, Keyed } from './_helpers';
+export { File } from "./File";
+export { Options } from "./Options";
+export { FileHeader };
+export { TransformedToken, TransformedTokens };
+export { Platform } from "./Platform";
+export { Transform };
+export { Filter };
+export { Format };
+export { Dictionary } from "./Dictionary";
+export { TransformGroup };
+export { Action };
+export { Parser };
+export { Config };
+export { FormatHelpers };
 
-declare namespace StyleDictionary {
+import { Named, Keyed } from "./_helpers";
 
-  type DesignToken = _DesignToken;
-  type DesignTokens = _DesignTokens;
-  type File = _File;
-  type Options = _Options;
-  type FileHeader = _FileHeader;
-  type TransformedToken = _TransformedToken;
-  type TransformedTokens = _TransformedTokens;
-  type Platform = _Platform;
-  type Transform = _Transform;
-  type Filter = _Filter;
-  type Format = _Format;
-  type Dictionary = _Dictionary;
-  type TransformGroup = _TransformGroup;
-  type Action = _Action;
-  type Parser = _Parser;
-  type Config = _Config;
+// aliased for backwards compatibility
+export type Property = DesignToken;
+export type Properties = DesignTokens;
+export type Prop = TransformedToken;
 
-  // aliased for backwards compatibility
-  type Property = DesignToken;
-  type Properties = DesignTokens;
-  type Prop = TransformedToken;
+export interface Core {
+  VERSION: string;
+  tokens: DesignTokens | TransformedTokens;
+  allTokens: TransformedTokens[];
+  properties: Properties;
+  allProperties: Prop[];
+  options: Config;
 
-  interface Core {
-    VERSION: string;
-    tokens: DesignTokens | TransformedTokens;
-    allTokens: TransformedTokens[];
-    properties: Properties;
-    allProperties: Prop[];
-    options: Config;
+  transform: Keyed<Transform>;
+  transformGroup: Keyed<TransformGroup>;
+  format: Keyed<Format>;
+  action: Keyed<Action>;
+  filter: Keyed<Filter>;
+  fileHeader: Keyed<FileHeader>;
+  parsers: Parser[];
 
-    transform: Keyed<Transform>;
-    transformGroup: Keyed<TransformGroup>;
-    format: Keyed<Format>;
-    action: Keyed<Action>;
-    filter: Keyed<Filter>;
-    fileHeader: Keyed<FileHeader>;
-    parsers: Parser[];
+  formatHelpers: FormatHelpers;
 
-    formatHelpers: FormatHelpers;
+  registerTransform(this: Core, transform: Named<Transform>): this;
+  registerTransformGroup(
+    this: Core,
+    transformGroup: Named<TransformGroup>
+  ): this;
+  registerFormat(this: Core, format: Named<Format>): this;
+  registerTemplate(this: Core, template: Named<{ template: string }>): this;
+  registerAction(this: Core, action: Named<Action>): this;
+  registerFilter(this: Core, filter: Named<Filter>): this;
+  registerParser(this: Core, parser: Parser): this;
 
-    registerTransform(this: Core, transform: Named<Transform>): this;
-    registerTransformGroup(this: Core, transformGroup: Named<TransformGroup>): this;
-    registerFormat(this: Core, format: Named<Format>): this;
-    registerTemplate(this: Core, template: Named<{ template: string }>): this;
-    registerAction(this: Core, action: Named<Action>): this;
-    registerFilter(this: Core, filter: Named<Filter>): this;
-    registerParser(this: Core, parser: Parser): this;
+  exportPlatform(this: Core, platform: string): TransformedTokens;
+  buildPlatform(this: Core, platform: string): this;
+  buildAllPlatforms(this: Core): this;
 
-    exportPlatform(this: Core, platform: string): TransformedTokens;
-    buildPlatform(this: Core, platform: string): this;
-    buildAllPlatforms(this: Core): this;
+  cleanPlatform(this: Core, platform: string): this;
+  cleanAllPlatforms(this: Core): this;
 
-    cleanPlatform(this: Core, platform: string): this;
-    cleanAllPlatforms(this: Core): this;
-
-    extend(this: Core, options: string | Config): this;
-  }
+  extend(this: Core, options: string | Config): this;
 }
 
 declare var StyleDictionary: StyleDictionary.Core;
-export = StyleDictionary;
+export default StyleDictionary;
 export as namespace StyleDictionary;

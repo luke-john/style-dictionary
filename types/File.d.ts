@@ -11,14 +11,19 @@
  * and limitations under the License.
  */
 
-import Options from './Options';
-import TransformedToken from './TransformedToken';
+import { Options } from "./Options";
+import { TransformedToken } from "./TransformedToken";
 
-interface File {
+// Note/Warning:
+//   File type exists as a global (via lib.dom.d.ts)
+//   so consumers can find them selves with strange behaviour when pasting code and not updating
+//   imports.
+export interface File {
   destination: string;
   format?: string;
-  filter?: string | Partial<TransformedToken> | ((token: TransformedToken) => boolean);
+  filter?:
+    | string
+    | Partial<TransformedToken>
+    | ((token: TransformedToken) => boolean);
   options?: Options;
 }
-
-export default File;
